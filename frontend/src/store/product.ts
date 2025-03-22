@@ -208,8 +208,15 @@ export const useProductStore = create<ProductState>((set) => ({
     }, 
 
     fetchProducts: async (): Promise<void> => {
-        const res = await fetch("/api/products");
-        const data = await res.json();
-        set({ products: data.data });
+        try {
+            const res = await fetch("http://localhost:4000/api/products");
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const data = await res.json();
+            set({ products: data.data });
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
     },
 }));
