@@ -209,14 +209,19 @@ export const useProductStore = create<ProductState>((set) => ({
 
     fetchProducts: async (): Promise<void> => {
         try {
-            const res = await fetch("https://localhost:4000/api/products");
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            const data = await res.json();
-            set({ products: data.data });
+          const res = await fetch("http://localhost:4000/api/products", {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            mode: 'cors' 
+          });
+      
+          if (!res.ok) throw new Error(`HTTP ${res.status} - ${await res.text()}`);
+          
+          const data = await res.json();
+          set({ products: data.data });
         } catch (error) {
-            console.error('Error fetching products:', error);
+          console.error('Network error:', error);
         }
-    },
+      },
 }));
