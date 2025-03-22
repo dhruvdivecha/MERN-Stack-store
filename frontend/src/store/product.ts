@@ -209,7 +209,7 @@ export const useProductStore = create<ProductState>((set) => ({
 
     fetchProducts: async (): Promise<void> => {
         try {
-          const res = await fetch("http://localhost:4000/api/products", {
+          const res = await fetch("https://localhost:4000/api/products", {
             headers: {
               'Content-Type': 'application/json',
             },
