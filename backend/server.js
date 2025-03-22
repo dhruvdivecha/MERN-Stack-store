@@ -10,6 +10,12 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json()); // to parse the json data from the frontend
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 const __dirname = path.resolve();
 
 app.use("/api/products", productRoutes);
