@@ -209,7 +209,7 @@ export const useProductStore = create<ProductState>((set) => ({
 
     fetchProducts: async (): Promise<void> => {
         try {
-            const res = await fetch("http://localhost:4000/api/products");
+            const res = await fetch("https://localhost:4000/api/products");
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
